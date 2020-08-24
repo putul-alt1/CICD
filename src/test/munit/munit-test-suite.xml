@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<munit:config name="munit-test-suite.xml" />
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="39b88d28-ba12-43c3-b21e-daf6ad8a8f64" >
+		<http:request-connection host="0.0.0.0" port="8081"/>
+	</http:request-config>
+	<munit:test name="munit-test-suite-munitFlowTest" doc:id="c77bb8d0-3aab-48a0-bb79-999fae67a2ac" description="Test">
+		<munit:enable-flow-sources >
+			<munit:enable-flow-source value="munitFlow" />
+		</munit:enable-flow-sources>
+		<munit:execution>
+			<http:request method="GET" doc:name="Request" doc:id="e6693597-02b5-41a6-b7c2-c77b65a90fba" config-ref="HTTP_Request_configuration" path="/test"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="f413c54c-210c-4446-b86c-1f1c749a388c" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
