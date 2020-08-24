@@ -9,6 +9,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	</http:listener-config>
 	<flow name="munitFlow" doc:id="1909d403-4388-4830-aa1b-2d4347a20060" >
 		<http:listener doc:name="Listener" doc:id="b8c6da4d-caef-4251-b1da-d4739fb80b8c" config-ref="HTTP_Listener_config" path="/test" allowedMethods="GET"/>
+		<logger level="INFO" doc:name="Logger" doc:id="abea26cd-fb81-4421-8066-4cfc5f06cf84" message='"hi"'/>
 		<set-payload value="hiiiiiiii" doc:name="Set Payload" doc:id="8cdbcf07-ced5-4e2c-a493-9e4a354433d0" />
 		<logger level="INFO" doc:name="Logger" doc:id="77cb2085-72e9-4e64-b3f8-7ebd26df0838" message="#[payload]"/>
 	</flow>
